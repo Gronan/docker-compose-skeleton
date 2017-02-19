@@ -1,5 +1,5 @@
 # docker-compose-skeleton
-ready to use docker-compose stack with php7 (php7-fpm), nginx and postgresql optimised for Symfony3 applications
+Ready to use docker-compose stack with php7 (php7-fpm), nginx and postgresql optimised for Symfony3 applications
 (with ELK & Redis)
 
 ##Disclaimer
@@ -87,4 +87,4 @@ docker exec -it $(docker ps -f name=postgre -q) psql -U postgres
 ##Special thanks
 User [Thomas Letellier](https://github.com/ltrtom) for help & support
 
-User [ronanguilloux](https://github.com/ronanguilloux) for inspiration
+User [Ronan Guilloux](https://github.com/ronanguilloux) for inspiration
