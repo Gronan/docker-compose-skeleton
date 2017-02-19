@@ -34,3 +34,14 @@ services:
         volumes:
             - ./logs/nginx/:/var/log/nginx
             - ./.conf/.site-conf/{PROJECT_NAME}.conf:/etc/nginx/conf.d/{PROJECT_NAME}.conf
+    elk:
+        image: willdurand/elk
+        ports:
+            - 81:80
+        volumes:
+            - elk/logstash:/etc/logstash
+            - elk/logstash/patterns:/opt/logstash/patterns
+        volumes_from:
+            - application
+            - php
+            - nginx
