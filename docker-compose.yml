@@ -39,9 +39,8 @@ services:
         ports:
             - 81:80
         volumes:
-            - elk/logstash:/etc/logstash
-            - elk/logstash/patterns:/opt/logstash/patterns
+            - /var/elk/logstash:/etc/logstash
+            - /var/elk/logstash/patterns:/opt/logstash/patterns
         volumes_from:
-            - application
             - php
             - nginx
