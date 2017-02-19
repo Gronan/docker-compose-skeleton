@@ -1,0 +1,36 @@
+# docker-compose.yml
+version: '2'
+
+services:
+    redis:
+        image: redis:alpine
+        ports:
+            - 6379:6379
+    db:
+        image: postgres:latest
+        env_file: .conf/.env/db.env
+        ports:
+            - 5435:5432
+        volumes:
+            - /var/lib/postgresql:/var/lib/postgresql
+    php:
+        image: php:7-fpm
+        ports:
+            - 9000:9000
+        links:
+            - db
+            - redis
+        volumes:
+            - /var/www/{PROJECT_NAME}:/var/www/{PROJECT_NAME}
+            - ./logs/symfony:/var/www/{PROJECT_NAME}/app/logs
+    nginx:
+        image: nginx:latest
+        ports:
+            - 80:80
+        links:
+            - php
+        volumes_from:
+            - php
+        volumes:
+            - ./logs/nginx/:/var/log/nginx
+            - ./.conf/.site-conf/{PROJECT_NAME}.conf:/etc/nginx/conf.d/{PROJECT_NAME}.conf
